@@ -160,6 +160,12 @@ h8 {
     text-decoration-color: #0366a3;
   }
 
+  a.intext:link, a.intext:visited {
+    color: #0366a3;
+    font-weight: 300;
+    text-decoration: none;
+  }
+
 
 /* ----------- */
 /* TOP NAV BAR */
@@ -196,7 +202,11 @@ h8 {
   /* MISC */
   /* ---- */
 
-
+  img {
+    /* width: fit-content; */
+    max-width: 900px;
+    max-height: 600px;
+  }
   
   div#top {
     position: fixed;
