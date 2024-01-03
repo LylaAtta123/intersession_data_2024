@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Intersession 2024: Introduction to Data Analysis and Visualization</title>
+    <link rel="stylesheet" href="./../../styles.css">
+</head>
+
+<body>
+    <div id="rectangle"></div>
+    <div class="top">
+        <h1>Introduction to Data Analysis and Visualization</h1>
+        <h5>Intersession 2024</h5>
+        <!-- <h5>Johns Hopkins University</h5> -->
+        <!-- <font size="-1"><a href=#about>About</a><b> | </b> <a href=#work>Work</a><b> <b>|</b> <a href=#other>Other</a><b> <b>|</b> <a href=#contact>Contact</a><b></font> -->
+
+        <div class="topnav">
+            <a class="bar" href="./../../index.html">Home</a>
+            <a class="bar" href="./../../docs/syllabus.html">Syllabus</a>
+            <a class="bar" href="./../../docs/week1.html">Week 1</a>
+            <a class="bar" href="./../../docs/week2.html">Week 2</a>
+            <a class="bar" href="./../../docs/week3.html">Week 3</a>
+            <a class="bar" href="./../../docs/resources.html">Resources</a>
+        </div>     
+    </div>
+
+    <h6><a id="about"></a>Getting started with Github</h6>
+    
+    <p>Git is a popular version control software that is very helpful in tracking versions of code during the development process. It keeps track of every file in the project repository and allows you to restor previous versions if things go wrong. GitHub allows you to host projects remotely so that multiple people can contribute to a project without contributors having to email each other files titled "script_version_13_final_final.R". Especially when working on projects where multiple people are contributing to code, it's easy to lose track of which version is the most up to date and things can go wrong if an important piece of code is overwritten in an update. GitHub's features also come in handy when working on a project by yourself, not only for the version control capabilities, but also because you can access your project from multiple machines if you have an internet connection. <br></p>
+    <p>To get practice with GitHub in this class, we will be adding data analyses and visualizations to the class GitHub. You are also welcome to create your own GitHub repositories for your class projects. <br> </p>
+    
+    <h7><a id="about"></a>Getting started:</h7> <br>
+    <ol>
+        <li>Getting started:
+            <ol>
+                <li>Create a GitHub account: <a class="intext" href="https://github.com/join">https://github.com/join</a> <br></li>
+                <li>Install Git on your machine:
+                    <ul>
+                        <li>If you are working on a mac or linux, you may already have Git installed. To check if you have git installed already, launch terminal and type the command <code>git version</code>. You should see something like this:<br>
+                            <br><img src="./../../assets/img/week1/week1_git_version_output.png" alt="git version output">  <br></li>
+                        <li>If not, you can download and install git from here: <a class="intext" href="https://git-scm.com/downloads">https://git-scm.com/downloads</a> <br></li>
+                    </ul>
+                </li>
+            </ol>
+        </li>
+        <li><p>Make a fork of the class repo</p>
+            <ul>
+                <li>Making a fork copies an existing repository to your account. It maintains a link to the original parent respository so that you can update your copy whenever the parent repository changes and you can also contribute new changes in your respository to the parent. <a class="intext" href="https://docs.github.com/en/get-started/quickstart/fork-a-repo">https://docs.github.com/en/get-started/quickstart/fork-a-repo</a> <br></li>
+                <ol>
+                    <li>To create a fork, navigate to the class repo on the GitHub website: <a class="intext" href="https://github.com/LylaAtta123/intersession_data_2024">https://github.com/LylaAtta123/intersession_data_2024</a> <br></li>
+                    <li>In the top right you will see a &quot;Fork&quot; button: <br>
+                        <br><img src="./../../assets/img/week1/week1_git_fork.png" alt="git fork"> <br></li>
+                    <li>Follow the instructions to finish creating the repo.</li>
+                </ol>
+                <li>When multiple people are working on a project, conflicts can arise. For example, if the orignal (remote) repository is updated and you do not sync your forked repository with the new changes and add new changes that conflict with the remote changes. See #6. for best practices to avoid conflicts.<br></li>
+            </ul>
+        </li>
+        <li><p>Clone your forked repo </p>
+            <ul>
+                <li>Cloning a repo creates a local (on your machine) copy of the repository that is hosted on GitHub. This allows you to create/delete files and make changes as if you were working in a regular directory on your computer.</li>
+                <ol>
+                    <li>To clone the repo, go to your forked repo in your GitHub account. Make sure in the top left you see [YOUR GitHub USERNAME/intersession_data_2023]. On the top right, you'll see a green "Code" button. After you click on code, copy the repo address. <br>
+                       <br> <img src="./../../assets/img/week1/week1_git_clone.png" alt="git clone">  <br></li>
+                    <li>In terminal enter the command <code>git clone [repo address]</code>. I like to keep all my GitHub repos in a folder called GitHub for organizational purposes. <br></li>
+                </ol>
+            </ul>
+        </li>
+        <li><p>Make and push a change in your local repo</p>
+            <ul>
+                <li>As your first change to the class GitHub, create a profile (real or imaginary) to add to the class website. Copy and modify the template example in the authors folder. Add a profile photo to the profiles folder.</li>
+                <li>To sync the changes you have made locally to your remote repository hosted on GitHub you need to:</li>
+                <ol>
+                    <li>Add the changes to the git staging area. This tells git which changes you want to sync to the remote repository. We want to sync all (1) changes: 
+                        <ol>
+                            <li>In terminal, navigate to your GitHub repo. <code>cd [directory name]</code> to navigate to a directory, <code>cd ..</code> to navigate to a parent directory, and <code>ls</code> to list file in current directory are helpful commands.</li>
+                            <li>When you're in your GitHub repo, enter the command <code>git add .</code> to add all changes to the git staging area. In the future, if you want to add a specific file to the staging area, you can use <code>git add [filename]</code> instead.</li>
+                            <li>To check that you files have been added, you can use the command <code>git status</code>. You should see your changed file in green. </li>
+                            <li>You can read more about the git staging area here: <a class="intext" href="https://www.atlassian.com/git/tutorials/saving-changes">https://www.atlassian.com/git/tutorials/saving-changes</a> </li>
+                        </ol>
+                    </li>
+                    <li>Commit changes. This tells git that this is a snapshot of the project that you want to capture. It is helpful (vital!) to add a meaningful commit message to each commit to enable you (or your project collaborators) to figure out how the project was updated in this step, in case you ever need to revert back to this snapshot. To commit changes and add a commit message, enter the command <code>git commit -m [your message]</code>.</li>
+                    <li>Now that you have committed your changes, you can &quot;push&quot; those changes to the remote repository by entering the command <code>git push</code>. You should now be able to see your added file in your forked repo on the GitHub website.</li>
+
+                </ol>
+                <li>Note on the <code>.gitignore</code> file: Remember how we used <code>git add .</code> to add all changed files to the staging area? Sometimes we want to add all files to the staging area except certain types of files. These could be large data files (GitHub has a 100Mb size limit) or temporary files that are not relevant to the project. You can tell git to ignore certain files by adding them to the <code>.gitignore</code> file. The <code>.gitignore</code> file is usually hidden, you can see it if you enter <code>ls -a</code> to list all files. <br></li>
+            </ul>
+        </li>
+        <li><p>Pull request</p>
+            <ul>
+                <li>Now that you have made changes and synced them from your local machine to your remote repository, you can request that your changes be added to the parent repository (the main class repo). </li>
+                <ol>
+                    <li>Head to your repo on the GitHub website. Find the &quot;Contribute&quot; button on the top right and then hit the "Open pull request button". <br>
+                        <br><img src="./../../assets/img/week1/week1_pull_request.png" alt="git clone"> <br></li>
+                </ol>
+            </ul>
+        </li>
+        <li><p>Syncing fork and pulling changes. </p>
+            <ul>
+                <li>It's generally a good idea to sync changes with the parent repo before you add any changes of your own to avoid conflicts. </li>
+                <ul>
+                    <li>To do that, click on the Sync fork button on the top right. This makes sure that your forked repo has the same files as the parent repo. <br>
+                        <br><img src="./../../assets/img/week1/week1_sync_fork.png" alt="git clone">  <br>
+                    </li>
+                    <li>Then make sure that your local repo is synced with your fork by entering the command <code>git pull</code> in terminal.</li>
+                </ul>
+                </li>
+            </ul>
+        </li>
+        
+    <ol>
+</body>
+
+</html>
