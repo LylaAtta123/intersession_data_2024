@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Intersession 2024: Introduction to Data Analysis and Visualization</title>
+    <link rel="stylesheet" href="./../../styles.css">
+</head>
+
+<body>
+    <div id="rectangle"></div>
+    <div class="top">
+        <h1>Introduction to Data Analysis and Visualization</h1>
+        <h5>Intersession 2024</h5>
+        <!-- <h5>Johns Hopkins University</h5> -->
+        <!-- <font size="-1"><a href=#about>About</a><b> | </b> <a href=#work>Work</a><b> <b>|</b> <a href=#other>Other</a><b> <b>|</b> <a href=#contact>Contact</a><b></font> -->
+
+        <div class="topnav">
+            <a class="bar" href="./../../index.html">Home</a>
+            <a class="bar" href="./../../docs/syllabus.html">Syllabus</a>
+            <a class="bar" href="./../../docs/week1.html">Week 1</a>
+            <a class="bar" href="./../../docs/week2.html">Week 2</a>
+            <a class="bar" href="./../../docs/week3.html">Week 3</a>
+            <a class="bar" href="./../../docs/resources.html">Resources</a>
+        </div>     
+    </div>
+
+    <h6><a id="about"></a>Exploratory data visualizations and plotting in base R</h6>
+
+    <p>
+        One of the first steps when starting a new data analysis project is exploring the dataset you have to learn what kind of data you're working with and what specific questions you might want to ask. Some questions we might want to answer could be:
+    
+        <ul>
+            <li>What format is the data in?</li>
+            <li>How many variables were measured?</li>
+            <li>What data types are in the data?</li>
+            <li>How many data points are there?</li>
+            <li>How is the data distributed?</li>
+            <li>Are there any subgroups in the data?</li>
+        </ul>
+    </p>
+
+    <p>
+        Oftentimes, it is also helpful to generate exploratory data visualizations to answer some of these questions. Because these data visualizations are part of an iterative process of exploring the data and will generally not be used to communicate results or findings, they do not need to be as polished as an explanatory data visualization that is presented outside of the individuals or team working with the data. <br><br>
+
+        To generate exploratory data visualizations, we can use the default plotting functions included in base R (the packages that are installed when we install R) because they are readily available, don't require any additional packages to be installed, and are often sufficient for our exploratory needs. Once we have a sense of what explanatory data visualizations we might want to create, we can then use more sophisticated plotting packages (like ggplot) to generate more polished figures. <br>
+
+    </p>
+    
+    <h7><a id="about"></a>Exploring the iris flower dataset</h7> <br>
+    <p>
+        To illustrate how we might go about exploring a new dataset including generating exploratory data visualizations in base R, we will use the <a class = "intext" href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/iris.html">iris flower dataset</a> that comes with the <code>dataests</code> package. <br>
+    </p>
+    <ol>
+        <li>
+            <b>Getting set up</b>
+            <ol>
+                <li>Make sure your forked repository is up to date with the class repository. To do this, navigate to your forked repository in your github online and clicking the Sync Fork button. </li>
+                <li>Make sure your local repository clone is updated: In terminal, navigate to your local github repository for the class and run <code>git pull</code>.</li>
+                <li>Create a new R script where you will do your exploratory analysis. To do this in terminal (macOS), you can use the command <code>touch</code> followed by the path and name of the script you want to create. For example, to create a script in the code>day3_plotting folder, run <code>touch code/day3_plotting/iris_explore.R</code></li>
+                <li>Now start RStudio and set the working directory to be the day3_plotting folder. The working directory is where R will by default look for and save files unless you specify a different path. There are two different ways you can do this:
+                    <ul>
+                        <li>In terminal: you can launch rstudio from terminal from the folder you want to be the working directory by running (in macos) <code>open -a rstudio code/day3_plotting/iris_explore.R</code>. This will start RStudio, open the <code>iris_explore.R</code> script, and set the working directory to <code>./code/day3_plotting</code>.</li>
+                        <li>You can also start RStudio by double clicking the icon. By default, the working directory will be the user home directory (the folder that contains Desktop, Documents, etc.). To set the working directory, you can use the <code>setwd("path to folder")</code> function in R. You can check what the working directory is using <code>getwd()</code>.</li>
+                    </ul>
+                </li>
+            </ol>
+        </li>
+        <li>
+            <b>Getting started</b>
+            <ol>
+                <li>There are many R <a class = "intext" href="https://hbctraining.github.io/Intro-to-R-flipped/lessons/04_introR_packages.html">packages and libraries</a> that are useful in conducting different types of data analyses. For this data exploration, we'll be using packages that are already installed as part of base R. To load a library so that its functions are available to use, you can use the <code>library()</code> function. For our analysis we're going to load the <code>datasets</code> and <code>viridis</code> packages.
+                <ul>
+                    <li><code>library(datasets)</code> loads the datasets package, which contains the iris flower data set we will explore and many other datasets.</li>
+                    <li><code>library(viridis)</code> loads the viridis package, which contains colorblind-friendly color palettes that we can use in our plots. These color palettes are also popular because they use colors that remain easily distinguishable when printing data visualizations in greyscale. <a class = "intext" href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html">Read more about the viridis color palettes</a>.</li>
+                </ul></li>
+                <li>Load the iris dataset using <code>data(iris)</code> <br>.
+                    <br> <img src="./../../assets/img/week1/day3_setup.png">  <br>
+                </li>
+                
+            </ol>
+        </li>
+        <li>
+            <b>What does the data look like?</b> Data can be formatted in many different ways: lists, tables, strings, matrices... Determining the format of the data we're working with will help us figure out next steps in our exploration:
+            <ol>
+                <li>Running <code>class(iris)</code> tells us that the data is in a data frame (R's table class).</li>
+                <li><code>dim(iris)</code> tells us that the dimensions of the data frame are 150x5 i.e. it has 150 rows and 5 columns.</li>
+                <li><code>head(iris)</code>prints the first 6 rows of the data frame. We can see that the five columns of the data frame contain the five variables that were collected in this data set. The rows are the data points, so we have 150 data points. </li>
+                <li><code>summary(iris)</code>gives us a summary of each of the five variables in the data. We can see that there are four quantitative variables: sepal length, sepal width, petal length, petal width, and one categorical variable: species. <br>
+                    <br> <img src="./../../assets/img/week1/day3_data_summary.png">  <br>
+                </li>
+            </ol>
+        </li>
+
+        <li>
+            <b>Exploratory data visualization:</b> Now that we have an initial sense of the format of the data we are working with, we want to explore our data. There are many questions we can start exploring. Below are just a few visualizations to demonstrate how to create exploratory plots. 
+            <ul>
+                <li><b>Histograms to look at variable distributions:</b>
+                    <ul>
+                        <li><code>hist()</code> is the base R function to generate historgrams. The first argument is a vector or list of values. Other useful arguments are <code>breaks</code> to change the the number of hisogram bins.</li>
+                        <li><br> <img src="./../../assets/img/week1/day3_hist_code.png">  <br></li>
+                        <li><br> <img src="./../../assets/img/week1/day3_hist.png">  <br></li>
+                    </ul>
+                </li>
+                <li><b>Scatter plots to look at relationships between variables:</b>
+                    <ul>
+                        <li><code>plot()</code> is the base R function to scatter plots or line graphs. To input the variables to put on the x and y axes respectively, you can input two vectors in the first and second argument respectively. Alternatively, you can input a table/data frame/matrix as the first argument and the first and second columns will be go on the x and y axis respectively. </li>
+                        <li>You can change the visual channels of the data points on the scatter plots using <a class = "intext" href="https://r-charts.com/base-r/pch-symbols/">arguments to the plot function</a>: 
+                            <ul>
+                                <li><code>pch</code> or "plot character" changes the shape of the points.</li>
+                                <li><code>cex</code> changes the size of the points.</li>
+                                <li><code>col</code> changes the color of the points.</li>
+                            </ul>
+                        </li>
+                        <li><br> <img src="./../../assets/img/week1/day3_scatter_code.png">  <br></li>
+                        <li><br> <img src="./../../assets/img/week1/day3_scatter.png">  <br></li>
+                    </ul>
+                </li>
+                <li><b>Titles and axis lables:</b>
+                    <ul>
+                        <li>Supplying a string as the <code>main</code> argument adds a title to your plot. </li>
+                        <li>Supplying a string as the <code>xlab</code> or <code>ylab</code> argument adds x or y axis labels to your plot, respectively. </li>
+                    </ul>
+                </li>
+                <li><b>Combining multiple plots in one figure:</b>
+                    <ul>
+                        <li>The <code>par</code> function sets a number of default graphical parameters that can be useful to modify when making plots in base R. These include modifying plot margins, number of plots per frame, background color, etc. Calling the <code>par</code> function modifies the default settings for all subsequent plots, until it is called again with different settings. <a class="intext" href="https://stat.ethz.ch/R-manual/R-devel/library/graphics/html/par.html"></a>Read more about the par function.</li>
+                        <li>To combine multiple plots in one figure, we can use the <code>mfrow</code> or the <code>mfcol</code> arguments to the <code>par</code> function. We can give it the dimensions of the plot array that we want. For example, <code>par(mfrow = c(2,3))</code> would indicate that we want to plot 6 plots in one figure with 2 rows and 3 columns. <code>mfrow</code> and <code>mfcol</code> indicate that we want the plots to be arranged by row and by column, respectively.</li> 
+                        <li><br> <img src="./../../assets/img/week1/day3_multiple_code.png">  <br></li>
+                        <li><br> <img src="./../../assets/img/week1/day3_multiple.png">  <br></li>
+                    </ul>
+                </li>
+                <li><b>Encoding groups using hue:</b> Our scatter plot currently includes data for 3 different iris flower species without distinguishing which data points correspond to which species. If we are interested in seeing how the iris sepal and petal characteristics differ between species, it may be useful to encode this categorical variable through the hue of the data points. To do this, we will have to 1) create a color map corresponding to the species, 2) create a character vector with an ordered list of the colors corresponding to the data points in our dataset, and 3) create a legend to clarify which colors correspond to which species.  
+                    <ol>
+                        <li>To create a colorblind-friendly and greyscale-friendly color map, we will use the <code>viridis</code> function from the <code>viridis</code> package. This function requires one argument for how many colors to output. We want one color for each unique species we have in our data, so we can use <code>length(unique(iris$Species))</code>. <br>
+                            <br> <img src="./../../assets/img/week1/day3_color_code.png">  <br>
+                            <br> <img src="./../../assets/img/week1/day3_color_legend.png">  <br>
+                        </li>
+                        <li>Now we want to supply the colors to the <code>plot</code> function. However, we can't just input the list of three colors as the <code>col</code> argument, because there is no way to match which color corresponds to which data point. We instead supply a list of colors, where the colors are in the same order as the species order in our data, where each entry has the matching color to the corresponding data point. To make this list, we can use the <code>match</code> function to match the species list in <code>iris$Species</code> to the names of names color character vector. The <code>match</code> function returns the indices of the matches, so to get the list of colors, we can index our original character vector of 3 colors. </li>
+                        <li>To indicate which color corresponds to which species, we need to add a legend using the <code>legend()</code> function. This function takes an <code>x</code> and <code>y</code> argument to specify where the legend is located on the plot and <code>legend</code>, <code>col</code>, and <code>pch</code> arguments to indicate the legend names, colors, and point shape.</li>
+
+                    </ol>
+                </li>
+                <li><b>Saving figures</b>
+                    <ul>
+                        <li>To save the figures we have created we can use a function depending on the format of the image file we want to create. Relevant functions include <code>png</code>, <code>jpg</code>, or <code>pdf</code></li>
+                        <li>Call the relevant function with the filename you want and any additional format arguments (for example, <code>png('iris_characteristics.png', height = 580, width = 580)</code> ), before you run your plotting code. After the plotting code, run <code>dev.off()</code></li>
+                        <li>Remember to name your file something that indicates what it contains to make it easier for you and your collaborators to find desired files later. </li>
+                    </ul>
+                </li>
+                <li><br> <img src="./../../assets/img/week1/day3_full_code.png">  <br></li>
+                <li><br> <img src="./../../assets/img/week1/day3_color_combined.png">  <br></li>
+            </ul>
+        </li>
+
+    </ol>
+
+    
+
+
+
+
+
+
+
+</body>
+
+</html>
