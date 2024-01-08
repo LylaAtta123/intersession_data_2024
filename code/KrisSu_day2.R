@@ -2,7 +2,8 @@
 
 # assigning variable
 x <- 1
-print(x)
+x
 my.variable <- 5
 new.variable <- 4+5
 
+?tests
