@@ -41,16 +41,22 @@ plot(iris$Petal.Length, iris$Petal.Width, pch = 16, cex = 0.75, col = "blue", bt
      xlab = "Petal Length(cm)", ylab = "Petal Width (cm)", main = "Iris Petal Characters")
 
 # colour by species
-col.species.unique <- viridis::viridis(3)
-col.species <- col.species.unique[as.factor(iris$Species)]
+col.species.unique <- viridis::viridis(length(unique(iris$Species)))
+names(col.species.unique) <- unique(iris$Species)
 
-png('iris_species.png', width = 1000, height = 520 )
+#png('iris_species.png', width = 1000, height = 520 )
 par(mfrow = c(1,2))
 plot(iris[,c(1,2)], pch = 16, cex = 0.75, col = col.species.unique, bty = "n", 
      xlab = "Sepal Length(cm)", ylab = "Sepal Width (cm)", main = "Iris Sepal Characters")
 
 plot(iris$Petal.Length, iris$Petal.Width, pch = 16, cex = 0.75, col = col.species.unique, bty = "n", 
      xlab = "Petal Length(cm)", ylab = "Petal Width (cm)", main = "Iris Petal Characters")
-dev.off()
+
+legend(x = 1, y = 2.5, 
+       legend = names(col.species.unique),
+       col = col.species.unique, pch = 16)
+# dev.off()
+
+
 
 
