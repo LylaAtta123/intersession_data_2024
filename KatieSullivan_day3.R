@@ -1,1 +1,0 @@
-#My name is Katie Sullivan.  I am a junior economics major at Hopkins and I love soccer and running.

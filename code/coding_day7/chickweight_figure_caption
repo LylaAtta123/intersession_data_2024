@@ -1,0 +1,3 @@
+Weight of Chicks on Different Diets Over Time
+
+The figure shows the change in weight over time for chicks on two different diets. Data was obtained from an R dataset, and the figure was generated using code in R. A two-sided t test determined that there is a statistically significant difference between the means of the weights in diet 1 compared to diet 4, and from the graph, we can conclude that overall, diet 4 was associated with more growth over time compared to diet 1.
