@@ -1,0 +1,44 @@
+#### SET UP ####
+getwd()
+setwd("\\Users\\William Mariscal\\intersession2024Group\\WM_code")
+
+library(MPsychoR)
+library(viridis)
+library(ggplot2)
+library(gridExtra)
+data("Rogers")
+str(Rogers)
+
+#### DATA ####
+dim(Rogers)
+head(Rogers)
+
+#### PLOT ####
+
+#plt <- ggplot(Rogers)+
+  #geom_point(aes(sad,weightloss,color = suicide))+
+  #scale_color_viridis(discrete = FALSE, option = "D")+
+  #labs(title = "Correlation between Mental and Physical Health", x = "Sadness",y = "Weightloss",color = "Suicide")
+#plot(plt)
+
+#Violin Plot style with weightloss
+
+plt2 <- ggplot(Rogers) +
+  geom_violin(aes(x = factor(sad), y = weightloss, fill = factor(suicide)), scale = "width") +
+  labs(title = "Correlation between Mental and Physical Health", x = "Sadness", y = "Weightloss", fill = "Suicide")
+
+# Display the violin plot
+print(plt2)
+
+#Violin Plot style with Weightgain
+plt3 <- ggplot(Rogers) +
+  geom_violin(aes(x = factor(sad), y = weightgain, fill = factor(suicide)), scale = "width") +
+  labs(title = "Correlation between Mental and Physical Health", x = "Sadness", y = "Weightgain", fill = "Suicide")
+
+# Display the violin plot
+print(plt3)
+
+#Multiple Arrangement for Plot 2 and 3
+png('Combined_plots.png',width = 800,height = 800)
+grid.arrange(plt2,plt3, ncol = 2, nrow = 2)
+dev.off()
